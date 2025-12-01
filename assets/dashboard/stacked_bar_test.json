@@ -1,0 +1,238 @@
+{
+  "formConfig": {
+    "backgroundColor": "#FFFFFF",
+    "padding": 12,
+    "rowSpacing": 12
+  },
+  "layout": {
+    "rows": [
+      {
+        "layoutType": "expanded",
+        "fields": [
+          {
+            "type": "stacked_bar",
+            "key": "timesheet_daily_hours",
+            "label": "Timesheet Daily Hours",
+            "config": {
+              "style": {
+                "height": 280,
+                "backgroundColor": "#FFFFFF",
+                "titleColor": "#1565C0",
+                "padding": 16,
+                "margin": 12,
+                "borderRadius": 16,
+                "colors": {
+                  "development": "#42A5F5",
+                  "testing": "#66BB6A",
+                  "documentation": "#FFA726",
+                  "meeting": "#AB47BC"
+                }
+              },
+              "chartOptions": {
+                "showLegend": true,
+                "legendPosition": "bottom",
+                "xAxisLabelColor": "#424242",
+                "yAxisLabelColor": "#424242",
+                "animationDuration": 1200
+              },
+              "data": {
+                "dailyActivityHours": {
+                  "1": {
+                    "Development": 8.0
+                  },
+                  "2": {
+                    "Development": 4.5,
+                    "Testing": 2.0,
+                    "Documentation": 1.5
+                  },
+                  "3": {
+                    "Testing": 7.0,
+                    "Meeting": 0.5
+                  },
+                  "4": {
+                    "Development": 2.0,
+                    "Meeting": 2.0
+                  },
+                  "5": {
+                    "Documentation": 5.0
+                  },
+                  "6": {},
+                  "7": {},
+                  "8": {
+                    "Development": 4.0,
+                    "Testing": 3.5
+                  },
+                  "9": {
+                    "Meeting": 6.0,
+                    "Development": 1.0
+                  },
+                  "10": {
+                    "Documentation": 1.0,
+                    "Testing": 0.5
+                  },
+                  "11": {},
+                  "12": {
+                    "Development": 3.0
+                  },
+                  "13": {},
+                  "14": {
+                    "Development": 1.0
+                  },
+                  "15": {
+                    "Development": 2.0
+                  },
+                  "16": {},
+                  "17": {},
+                  "18": {},
+                  "19": {},
+                  "20": {
+                    "Development": 1.0
+                  },
+                  "21": {
+                    "Development": 1.0
+                  },
+                  "22": {},
+                  "23": {},
+                  "24": {},
+                  "25": {},
+                  "26": {},
+                  "27": {},
+                  "28": {},
+                  "29": {},
+                  "30": {}
+                },
+                "totalHoursWorked": 10.0
+              }
+            }
+          }
+        ]
+      },
+      {
+        "layoutType": "expanded",
+        "fields": [
+          {
+            "type": "leave",
+            "key": "leave_usage_trend",
+            "label": "Leave Usage Trend",
+            "config": {
+              "style": {
+                "height": 240,
+                "backgroundColor": "#FFFFFF",
+                "titleColor": "#1565C0",
+                "padding": 12,
+                "margin": 12,
+                "borderRadius": 16,
+                "lineColor": "#FF7043"
+              },
+              "chartOptions": {
+                "lineThickness": 3,
+                "markerVisibility": true,
+                "animationDuration": 1500
+              },
+              "data": {
+                "monthlyLeaveDays": {
+                  "1": 1.0,
+                  "2": 0.0,
+                  "3": 4.4,
+                  "4": 8.0,
+                  "5": 0.0,
+                  "6": 15.5,
+                  "7": 0.0,
+                  "8": 7.0,
+                  "9": 2.0,
+                  "10": 3.0,
+                  "11": 1.5,
+                  "12": 1.5
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "layoutType": "expanded",
+        "fields": [
+          {
+            "type": "leaveKpi",
+            "key": "leave_kpi_section",
+            "label": "Leave Balance (KPI Cards)",
+            "config": {
+              "style": {
+                "height": 250,
+                "backgroundColor": "#F5F5F5",
+                "padding": 12,
+                "margin": 12,
+                "borderRadius": 16,
+                "kpiCardColor": "#FFFFFF",
+                "kpiTitleColor": "#424242",
+                "kpiValueColor": "#1565C0"
+              },
+              "data": [
+                {
+                  "leaveTypeName": "Casual Leave",
+                  "usedDays": 26.5,
+                  "remainingDays": 5.5
+                },
+                {
+                  "leaveTypeName": "Sick Leave",
+                  "usedDays": 0.0,
+                  "remainingDays": 12.0
+                },
+                {
+                  "leaveTypeName": "Earned Leave",
+                  "usedDays": 4.0,
+                  "remainingDays": 8.0
+                },
+                {
+                  "leaveTypeName": "Loss of Pay",
+                  "usedDays": 0.0,
+                  "remainingDays": 0.0
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "layoutType": "expanded",
+        "fields": [
+          {
+            "type": "gauge",
+            "key": "monthly_productivity_kpi",
+            "label": "Monthly Productivity Score",
+            "config": {
+              "style": {
+                "height": 260,
+                "backgroundColor": "#FFFFFF",
+                "titleColor": "#1565C0",
+                "padding": 16,
+                "margin": 12,
+                "borderRadius": 16
+              },
+              "chartOptions": {
+                "gaugeStartAngle": 180,
+                "gaugeEndAngle": 0,
+                "rangeColors": [
+                  "#E57373",
+                  "#FFB74D",
+                  "#81C784"
+                ],
+                "animationDuration": 1500
+              },
+              "data": {
+                "workingDays": 20,
+                "totalHoursWorked": 10.0,
+                "expectedHours": 160.0,
+                "productivityPercentage": 6.25,
+                "category": "LOW"
+              }
+            },
+            "layout": {
+              "span": 1
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

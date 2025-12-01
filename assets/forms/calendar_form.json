@@ -1,0 +1,50 @@
+{
+  "formConfig": {
+    "backgroundColor": "#FAFAFA",
+    "padding": 16,
+    "rowSpacing": 12
+  },
+  "layout": {
+    "rows": [
+      {
+        "layoutType": "expanded",
+        "fieldGap": 16,
+        "fields": [
+          {
+            "type": "calendar",
+            "key": "work_date",
+            "label": "Work Date",
+            "dataKey": "dateStatuses",
+            "config": {
+              "api": {
+                "endpoint": "/api/timesheet/status_calendar/f0c6b828-5177-420d-b237-f5e499359eb3"
+              },
+              "style": {
+                "width": 800,
+                "cellHeight": 60,
+                "selectedBorderColor": "#2196F3",
+                "todayBorderColor": "#00FF55FF",
+                "selectedElevation": 6,
+                "todayElevation": 4,
+                "borderRadius": 12,
+                "calendarBackground": "#FFFFFF",
+                "calendarShadowColor": "#00000033",
+                "calendarShadowBlur": 10,
+                "calendarPadding": 16,
+                "headerFontSize": 18,
+                "headerFontWeight": "bold",
+                "headerTextColor": "#333333",
+                "startWeekOnMonday": true
+              }
+            },
+            "action": {
+              "type": "navigateTo",
+              "endpoint": "/api/timesheet/get-or-create/f0c6b828-5177-420d-b237-f5e499359eb3",
+              "navigationTarget": "TimesheetFormScreen"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

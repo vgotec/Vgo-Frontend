@@ -1,0 +1,35 @@
+# Flutter / Dart
+.dart_tool/
+.packages
+.pub/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.flutter-android-release/
+.flutter-android-profile/
+.flutter-android-debug/
+.flutter-plugins
+.idea/
+.vscode/
+*.iml
+
+# Generated plugin files
+android/.gradle/
+android/local.properties
+
+# Windows build
+build/windows/
+build/*.zip
+
+# macOS
+build/macos/
+DerivedData/
+
+# Linux
+build/linux/
+
+# Xcode
+ios/Pods/
+ios/Runner.xcworkspace/
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
