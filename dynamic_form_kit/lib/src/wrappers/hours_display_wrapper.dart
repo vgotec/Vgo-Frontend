@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dynamic_form_kit/src/manager/form_state_manager.dart';
 import 'package:dynamic_form_kit/src/utils/style_parser.dart';
-import 'package:dynamic_form_kit/src/widget_collection/vgotec_hours_Display.dart';
+import 'package:dynamic_form_kit/src/widget_collection/vgotec_hours_display.dart';
 
 class HoursLabelWrapper extends StatefulWidget {
   final Map<String, dynamic> field;
