@@ -39,27 +39,31 @@ class StackedBarChart extends StatelessWidget {
     return BarChart(
       BarChartData(
         alignment: BarChartAlignment.spaceAround,
-      barTouchData: BarTouchData(
+        barTouchData: BarTouchData(
           enabled: true,
           touchTooltipData: BarTouchTooltipData(
-            // ✅ FINAL ATTEMPT FIX: Reverting to the 1-argument signature for getTooltipColor 
+            // ✅ FINAL ATTEMPT FIX: Reverting to the 1-argument signature for getTooltipColor
             // as demanded by the TypeError shown in the image.
             getTooltipColor: (
-              BarChartGroupData group, 
+              BarChartGroupData group,
             ) {
               return Colors.blueGrey.withOpacity(0.9);
             },
-            
-            // NOTE: The getTooltipItem should still use the 4-argument signature 
+
+            // NOTE: The getTooltipItem should still use the 4-argument signature
             // as it needs more detail to calculate the tooltip content.
             getTooltipItem: (group, groupIndex, rod, rodIndex) {
               return BarTooltipItem(
                 'Total: ${rod.toY.toStringAsFixed(1)}h',
-                const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 12),
+                const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 12),
               );
             },
-            tooltipPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-            tooltipBorderRadius: BorderRadius.circular(8), 
+            tooltipPadding:
+                const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+            tooltipBorderRadius: BorderRadius.circular(8),
           ),
         ),
         titlesData: _buildTitlesData(labels, categories, chartOptions),
@@ -82,8 +86,8 @@ class StackedBarChart extends StatelessWidget {
         ),
         barGroups: _buildBarGroups(labels, series, categories, colorMap),
         maxY: maxValue,
-        groupsSpace: (chartOptions?['barSpacing'] is num) 
-            ? (chartOptions!['barSpacing'] as num).toDouble() 
+        groupsSpace: (chartOptions?['barSpacing'] is num)
+            ? (chartOptions!['barSpacing'] as num).toDouble()
             : 20.0,
       ),
       swapAnimationDuration: animationDuration,
@@ -97,11 +101,11 @@ class StackedBarChart extends StatelessWidget {
       List<String> categories,
       Map<String, Color> colorMap) {
     List<BarChartGroupData> groups = [];
-    final barRadius = (chartOptions?['barRadius'] is num) 
-        ? (chartOptions!['barRadius'] as num).toDouble() 
+    final barRadius = (chartOptions?['barRadius'] is num)
+        ? (chartOptions!['barRadius'] as num).toDouble()
         : 6.0;
-    
-    final double barWidth = (chartOptions?['barWidth'] is num) 
+
+    final double barWidth = (chartOptions?['barWidth'] is num)
         ? (chartOptions!['barWidth'] as num).toDouble()
         : 15.0;
 
@@ -112,7 +116,7 @@ class StackedBarChart extends StatelessWidget {
       for (final cat in categories) {
         final values = series[cat] ?? [];
         final v = (i < values.length) ? values[i] : 0.0;
-        
+
         if (v > 0) {
           final color = colorMap[cat.toLowerCase()] ?? _defaultColorFor(cat);
           rodStacks.add(BarChartRodStackItem(stackBase, stackBase + v, color));
@@ -137,8 +141,8 @@ class StackedBarChart extends StatelessWidget {
     return groups;
   }
 
-  FlTitlesData _buildTitlesData(
-      List<String> labels, List<String> categories, Map<String, dynamic>? chartOptions) {
+  FlTitlesData _buildTitlesData(List<String> labels, List<String> categories,
+      Map<String, dynamic>? chartOptions) {
     final showXAxis = chartOptions?['showXAxis'] != false;
     final xAxisLabelColor = _parseColor(chartOptions?['xAxisLabelColor']);
     final yAxisLabelColor = _parseColor(chartOptions?['yAxisLabelColor']);
@@ -148,7 +152,8 @@ class StackedBarChart extends StatelessWidget {
       rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
       topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
       bottomTitles: AxisTitles(
-        axisNameWidget: const Text('Day', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+        axisNameWidget: const Text('Day',
+            style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
         sideTitles: SideTitles(
           showTitles: showXAxis,
           reservedSize: 28,
@@ -169,7 +174,8 @@ class StackedBarChart extends StatelessWidget {
         ),
       ),
       leftTitles: AxisTitles(
-        axisNameWidget: const Text('Hours', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+        axisNameWidget: const Text('Hours',
+            style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
         sideTitles: SideTitles(
           showTitles: true,
           reservedSize: 28,

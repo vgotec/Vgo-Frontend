@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:dynamic_form_kit/src/widget_collection/productivity_gauge.dart';
 import 'package:flutter/material.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart'; // SfRadialGauge
-import '../manager/form_state_manager.dart'; // Assumed from previous context
-import '../utils/style_parser.dart'; // Assumed from previous context
+import 'package:syncfusion_flutter_gauges/gauges.dart';
+import 'package:dynamic_form_kit/src/widget_collection/productivity_gauge.dart';
+import '../manager/form_state_manager.dart';
+import '../utils/style_parser.dart';
 
 
 /// Wrapper that adapts your JSON field into the ProductivityGauge widget.
