@@ -13,5 +13,5 @@ pubspec.lock
 # OS
 .DS_Store
 Thumbs.db
-.upload-keystore.b64
-.upload-keystore.jks
+upload-keystore.b64
+upload-keystore.jks
