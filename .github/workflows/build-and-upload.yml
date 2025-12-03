@@ -1,0 +1,63 @@
+name: Build and Upload AAB
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      APPLICATION_ID: ${{ secrets.APPLICATION_ID }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Decode keystore
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+        run: |
+          mkdir -p ~/.keystores
+          echo "$KEYSTORE_BASE64" | base64 --decode > ~/.keystores/timesheet-release.jks
+          ls -l ~/.keystores
+
+      - name: Create key.properties
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+        run: |
+          cat > key.properties <<-EOF
+          storePassword=${KEYSTORE_PASSWORD}
+          keyPassword=${KEY_PASSWORD}
+          keyAlias=${KEY_ALIAS}
+          storeFile=/home/runner/.keystores/timesheet-release.jks
+          EOF
+          echo "key.properties created"
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 'stable'
+
+      - name: Flutter pub get
+        run: flutter pub get
+
+      - name: Build AAB
+        run: flutter build appbundle --release
+
+      - name: Upload AAB to Play (internal)
+        uses: r0adkll/upload-google-play@v1
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+          packageName: ${{ env.APPLICATION_ID }}
+          releaseFiles: build/app/outputs/bundle/release/app-release.aab
+          track: internal
