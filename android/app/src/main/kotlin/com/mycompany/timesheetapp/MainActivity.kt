@@ -1,4 +1,4 @@
-package com.mycompany.timesheetapp
+package com.Vgotec.timesheet
 
 import io.flutter.embedding.android.FlutterActivity
 

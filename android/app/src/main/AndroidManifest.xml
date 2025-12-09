@@ -1,6 +1,11 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.Vgotec.timesheet">
+     // Added INTERNET permission to access the internet
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
-        android:label="timesheet_ui"
+        android:label="HRMS Tool"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

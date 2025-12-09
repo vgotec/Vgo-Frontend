@@ -1,3 +1,4 @@
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -5,8 +6,19 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+import java.util.Properties
+import java.io.FileInputStream
+
+// load key.properties if it exists (key.properties should be at project root)
+val keystorePropertiesFile = rootProject.file("key.properties")
+val keystoreProperties = Properties()
+if (keystorePropertiesFile.exists()) {
+    keystoreProperties.load(FileInputStream(keystorePropertiesFile))
+}
+
+
 android {
-    namespace = "com.example.timesheet_ui"
+    namespace = "com.Vgotec.timesheet"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -20,24 +32,50 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.timesheet_ui"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        applicationId = "com.Vgotec.timesheet"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
 
-    buildTypes {
-        release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+    // ---------- ADD THIS signingConfigs BLOCK ----------
+    signingConfigs {
+        create("release") {
+            if (keystorePropertiesFile.exists()) {
+                storeFile = file(keystoreProperties.getProperty("storeFile"))
+                storePassword = keystoreProperties.getProperty("storePassword")
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+            } else {
+                // keep release unset when key.properties not present (prevents build failure if you intentionally don't have keystore)
+            }
         }
     }
+
+buildTypes {
+    release {
+        // use the release signing config if key.properties exists
+        if (keystorePropertiesFile.exists()) {
+            signingConfig = signingConfigs.getByName("release")
+        } else {
+            signingConfig = signingConfigs.getByName("debug")
+        }
+
+        isMinifyEnabled = false            // enable code shrinking (R8)
+        isShrinkResources = false          // remove unused resources
+        isDebuggable = false
+
+        // ProGuard/R8 config files
+        proguardFiles(
+            getDefaultProguardFile("proguard-android-optimize.txt"),
+            "proguard-rules.pro"
+        )
+    }
 }
+
+}
+
 
 flutter {
     source = "../.."
